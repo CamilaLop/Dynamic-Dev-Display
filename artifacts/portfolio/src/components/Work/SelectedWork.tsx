@@ -59,6 +59,7 @@ const cards = [
 
 export function SelectedWork() {
   const root = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
   const setActiveProject = (index: number) => {
@@ -84,7 +85,7 @@ export function SelectedWork() {
 
       gsap.timeline({
         scrollTrigger: {
-          trigger: ".selected-section",
+          trigger: root.current,
           start: "top 78%",
           toggleActions: "play none none reverse",
         },
@@ -126,7 +127,7 @@ export function SelectedWork() {
           transformOrigin: "50% 999px -100px",
           backdropFilter: "blur(20px)",
           x: "-50%",
-          y: "-45%",
+          y: "-50%",
           z: -500,
           rotateX: 2,
           autoAlpha: 1,
@@ -159,7 +160,7 @@ export function SelectedWork() {
         )
         .to(".card", { duration: 0.1, autoAlpha: 0, stagger: -1 }, 1.9);
 
-      cardsTl.progress(0.07);
+      cardsTl.progress(0);
 
       const master = gsap.timeline({
         scrollTrigger: {
@@ -185,7 +186,7 @@ export function SelectedWork() {
         master.call(() => setActiveProject(index), [], start + 0.01);
 
         if (index > 0) {
-                    master
+          master
             .to(
               previous,
               {
@@ -214,7 +215,6 @@ export function SelectedWork() {
         .to(".work-transition-label", { yPercent: 0, opacity: 1, duration: 0.12, ease: "power2.out" }, 0.78)
         .to(".work-semicircle-dark", { scale: 1, duration: 0.22, ease: "power2.inOut" }, 0.8)
         .to(".work-transition-label", { yPercent: -45, opacity: 0, duration: 0.1, ease: "power2.in" }, 0.95);
-
 
       const dotButtons = gsap.utils.toArray<HTMLButtonElement>(".work-card-dot");
 
@@ -255,12 +255,40 @@ export function SelectedWork() {
         },
       });
 
-      const refresh = () => ScrollTrigger.refresh();
-      window.addEventListener("resize", refresh);
+      const cursor = cursorRef.current;
+      const carousel = root.current?.querySelector<HTMLElement>(".carousel-clip");
+
+      if (cursor && carousel) {
+        const xSet = gsap.quickSetter(cursor, "x", "px");
+        const ySet = gsap.quickSetter(cursor, "y", "px");
+
+        const onMove = (e: MouseEvent) => {
+          xSet(e.clientX);
+          ySet(e.clientY);
+        };
+
+        const onEnter = () => {
+          gsap.to(cursor, { opacity: 1, scale: 1, duration: 0.38, ease: "back.out(1.6)", overwrite: true });
+        };
+
+        const onLeave = () => {
+          gsap.to(cursor, { opacity: 0, scale: 0.4, duration: 0.28, ease: "power2.in", overwrite: true });
+        };
+
+        carousel.addEventListener("mousemove", onMove);
+        carousel.addEventListener("mouseenter", onEnter);
+        carousel.addEventListener("mouseleave", onLeave);
+
+        return () => {
+          arrowTl.kill();
+          carousel.removeEventListener("mousemove", onMove);
+          carousel.removeEventListener("mouseenter", onEnter);
+          carousel.removeEventListener("mouseleave", onLeave);
+        };
+      }
 
       return () => {
         arrowTl.kill();
-        window.removeEventListener("resize", refresh);
       };
     }, root);
 
@@ -289,45 +317,47 @@ export function SelectedWork() {
       </div>
 
       <main className="index02-main">
-        <div className="carousel">
-          {cards.map((card, index) => (
-            <div className="card" key={card.n} data-card-index={index}>
-              <span>{card.n}</span>
-            </div>
-          ))}
-
-          <div className="work-card-dots" aria-label="Selecionar projeto">
+        <div className="carousel-clip">
+          <div className="carousel">
             {cards.map((card, index) => (
-              <button
-                key={card.n}
-                className={`work-card-dot ${index === activeIdx ? 'is-active' : ''}`}
-                type="button"
-                data-dot-index={index}
-                aria-label={`Ir para o projeto ${card.n} — ${card.title}`}
-                aria-current={index === activeIdx}
-              >
+              <div className="card" key={card.n} data-card-index={index}>
                 <span>{card.n}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="work-side-copy" aria-hidden="true">
-            {cards.map((card, index) => (
-              <div className="work-side-copy__item" key={card.n} data-copy-index={index}>
-                <span>{card.category} · {card.year}</span>
-                <h3>{card.title}</h3>
-                <p>{card.description}</p>
               </div>
             ))}
-          </div>
 
-          <div className="work-semicircle-transition" aria-hidden="true">
-            <div className="work-semicircle-dark" />
-          </div>
+            <div className="work-card-dots" aria-label="Selecionar projeto">
+              {cards.map((card, index) => (
+                <button
+                  key={card.n}
+                  className={`work-card-dot ${index === activeIdx ? 'is-active' : ''}`}
+                  type="button"
+                  data-dot-index={index}
+                  aria-label={`Ir para o projeto ${card.n} — ${card.title}`}
+                  aria-current={index === activeIdx}
+                >
+                  <span>{card.n}</span>
+                </button>
+              ))}
+            </div>
 
-          <div className="work-transition-label">
-            <span>next</span>
-            <strong>Experience Index</strong>
+            <div className="work-side-copy" aria-hidden="true">
+              {cards.map((card, index) => (
+                <div className="work-side-copy__item" key={card.n} data-copy-index={index}>
+                  <span>{card.category} · {card.year}</span>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="work-semicircle-transition" aria-hidden="true">
+              <div className="work-semicircle-dark" />
+            </div>
+
+            <div className="work-transition-label">
+              <span>next</span>
+              <strong>Experience Index</strong>
+            </div>
           </div>
         </div>
 
@@ -335,6 +365,18 @@ export function SelectedWork() {
           <path stroke="#333" d="M0,0 0,0" />
         </svg>
       </main>
+
+      <div
+        ref={cursorRef}
+        className="work-card-cursor"
+        aria-hidden="true"
+        style={{ opacity: 0, transform: "translate(-50%, -50%) scale(0.4)" }}
+      >
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#f4f4f1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        <span>View More</span>
+      </div>
     </section>
   );
 }

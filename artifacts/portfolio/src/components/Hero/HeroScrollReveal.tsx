@@ -84,18 +84,7 @@ export function HeroScrollReveal({
           "-=0.78"
         )
         .to(".hero-image-inner", { scale: 1.08, yPercent: 0, duration: 1.4 }, "<")
-        .to([".hero-kicker", ".scroll-cue"], { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.08 }, "-=0.45")
-        .to(
-          ".hero-image-shell",
-          {
-            yPercent: -1.4,
-            duration: 1.6,
-            yoyo: true,
-            repeat: 1,
-            ease: "sine.inOut",
-          },
-          "-=0.25"
-        );
+        .to([".hero-kicker", ".scroll-cue"], { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.08 }, "-=0.45");
     }, root);
 
     return () => ctx.revert();
@@ -134,6 +123,7 @@ export function HeroScrollReveal({
             borderRadius: 0,
             marginInline: 0,
             duration: 1,
+            overwrite: "auto",
           },
           0
         )
@@ -143,6 +133,7 @@ export function HeroScrollReveal({
             scale: 1.16,
             yPercent: -16,
             duration: 1,
+            overwrite: "auto",
           },
           0
         )

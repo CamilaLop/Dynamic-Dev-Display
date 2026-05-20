@@ -112,7 +112,7 @@ export function AboutSection() {
         transformOrigin: "left center",
       });
 
-      gsap.set(".about-recruiter-skill, .about-recruiter-skills__header", {
+      gsap.set(".about-highlight", {
         y: 42,
         opacity: 0,
       });
@@ -142,13 +142,6 @@ export function AboutSection() {
       });
 
       introTl
-        .to(section, {
-          y: 0,
-          borderTopLeftRadius: "0rem",
-          borderTopRightRadius: "0rem",
-          duration: 0.5,
-          ease: "power3.out",
-        }, 0)
         .to(".about-title-word", {
           yPercent: 0,
           opacity: 1,
@@ -168,11 +161,11 @@ export function AboutSection() {
           duration: 0.52,
           ease: "power3.out",
         }, 0.22)
-        .to(".about-recruiter-skills__header, .about-recruiter-skill", {
+        .to(".about-highlight", {
           y: 0,
           opacity: 1,
           duration: 0.36,
-          stagger: 0.018,
+          stagger: 0.06,
           ease: "power3.out",
         }, 0.52);
 
@@ -180,7 +173,7 @@ export function AboutSection() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${window.innerWidth * (panels.length - 1.15)}`,
+          end: () => `+=${window.innerWidth * (panels.length - 1)}`,
           scrub: 1.15,
           pin: true,
           anticipatePin: 1,

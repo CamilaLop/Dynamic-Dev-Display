@@ -299,11 +299,18 @@ img, svg {
   overflow: visible;
 }
 
+.carousel-clip {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
 .carousel {
   width: 100vw;
   height: 100vh;
   perspective: 300px;
-  overflow: hidden;
+  overflow: visible;
   opacity: 1 !important;
   background: #f4f4f1;
   transform: translateZ(0);
@@ -532,6 +539,39 @@ img, svg {
   opacity: 1;
 }
 
+.work-card-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: #201d1d;
+  color: #f4f4f1;
+  pointer-events: none;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  will-change: transform, opacity;
+}
+
+.work-card-cursor svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
+}
+
+.work-card-cursor span {
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: rgba(244, 244, 241, 0.72);
+}
+
 .experience-section {
   --color-cream: #201d1d;
   --color-text: #f4f4f1;
@@ -678,10 +718,6 @@ img, svg {
   overflow: hidden;
   background: #f4f4f1;
   color: #201d1d;
-  border-top-left-radius: 3rem;
-  border-top-right-radius: 3rem;
-  transform: translateY(10vh);
-  box-shadow: 0 -2.5rem 7rem rgba(32, 29, 29, 0.12);
   isolation: isolate;
 }
 
