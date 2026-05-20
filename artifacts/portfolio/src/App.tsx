@@ -5,6 +5,7 @@ import { SelectedWork } from "./components/Work/SelectedWork";
 import { RioEditorial } from "./components/Editorial/RioEditorial";
 import { ExperienceHover } from "./components/Experience/ExperienceHover";
 import { AboutSection } from "./components/About/AboutSection";
+import { TimelineSection } from "./components/About/TimelineSection";
 import { Footer } from "./components/Footer/Footer";
 import { useLenis } from "./hooks/useLenis";
 import heroRio from "@assets/rio-paisagem_1779253459430.png";
@@ -30,6 +31,7 @@ export default function App() {
           <SelectedWork />
           <ExperienceHover />
           <AboutSection />
+          <TimelineSection />
           <RioEditorial />
           <Footer />
         </main>
