@@ -1,15 +1,104 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export function Footer() {
+  const root = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    if (!root.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".footer-parallax",
+        { y: 70 },
+        {
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "top 20%",
+            scrub: 1.4,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".footer-heading",
+        { y: 40 },
+        {
+          y: -20,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.6,
+          },
+        }
+      );
+
+      gsap.set(".footer-line", { scaleX: 0, transformOrigin: "left" });
+      gsap.to(".footer-line", {
+        scaleX: 1,
+        duration: 1.2,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top 70%",
+        },
+      });
+
+      gsap.set([".footer-cta", ".footer-links"], { y: 30, opacity: 0 });
+      gsap.to([".footer-cta", ".footer-links"], {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        stagger: 0.12,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top 65%",
+        },
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer id="contact" className="bg-[#201d1d] text-[#f4f4f1] py-24 px-8 md:px-16 flex flex-col items-center justify-center text-center">
-      <div className="max-w-2xl mx-auto flex flex-col items-center gap-12">
-        <h2 className="text-4xl md:text-6xl tracking-tight font-medium" style={{ letterSpacing: '-0.06em' }}>Let's build something exceptional.</h2>
-        <a href="mailto:camila@example.com" className="text-xl md:text-2xl border-b border-[#f4f4f1]/30 pb-1 hover:border-[#f4f4f1] transition-colors uppercase tracking-widest text-[#f4f4f1]/80 hover:text-[#f4f4f1]">
-          camila@example.com
-        </a>
-        <div className="flex gap-8 mt-8 text-sm tracking-widest uppercase text-[#f4f4f1]/50">
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-[#f4f4f1] transition-colors">GitHub</a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-[#f4f4f1] transition-colors">LinkedIn</a>
+    <footer id="contact" ref={root} className="footer-section">
+      <div className="footer-parallax">
+        <div className="footer-top">
+          <span className="footer-kicker">— Contact · 05</span>
+          <div className="footer-line" aria-hidden="true" />
         </div>
+
+        <h2 className="footer-heading">
+          Let's build something<br />
+          <em>exceptional.</em>
+        </h2>
+
+        <a
+          href="mailto:camila@example.com"
+          className="footer-cta"
+          aria-label="Send email to Camila"
+        >
+          camila@example.com
+          <svg className="footer-cta-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </a>
+
+        <div className="footer-links">
+          <a href="https://github.com" target="_blank" rel="noreferrer" className="footer-link">GitHub</a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer-link">LinkedIn</a>
+        </div>
+
+        <p className="footer-copy">© 2026 Camila Lopes — All rights reserved</p>
       </div>
     </footer>
   );

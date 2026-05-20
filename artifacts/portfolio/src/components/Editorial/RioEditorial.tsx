@@ -15,6 +15,51 @@ export function RioEditorial() {
       gsap.set(".rio-reveal", { yPercent: 105, opacity: 0 });
       gsap.set(".rio-sym", { rotate: 22, scale: 0.76, opacity: 0 });
 
+      gsap.fromTo(
+        ".rio-parallax-layer",
+        { y: 90 },
+        {
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "top 15%",
+            scrub: 1.4,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".rio-title",
+        { y: 50 },
+        {
+          y: -28,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.6,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".rio-stats",
+        { y: 36 },
+        {
+          y: -18,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        }
+      );
+
       gsap.to(".rio-reveal", {
         yPercent: 0,
         opacity: 1,
@@ -48,43 +93,45 @@ export function RioEditorial() {
 
   return (
     <section ref={root} className="rio-section">
-      <div className="clip">
-        <div className="rio-reveal rio-label">— Manifesto · 03</div>
-      </div>
-
-      <div className="rio-title">
-        <h2 className="rio-reveal">
-          Rio Editorial
-          <br />
-          System.
-          <SemiLogoSymbol className="rio-sym" />
-        </h2>
-      </div>
-
-      <div className="rio-grid">
-        <div className="rio-text rio-reveal">
-          <p>
-            Um sistema visual inspirado no Rio, em composição editorial, movimento suave e
-            identidade digital autoral.
-          </p>
-          <p>
-            Cada projeto funciona como uma página viva: hierarquia primeiro, movimento a
-            serviço da leitura e interação sem excesso.
-          </p>
+      <div className="rio-parallax-layer">
+        <div className="clip">
+          <div className="rio-reveal rio-label">— Manifesto · 03</div>
         </div>
-      </div>
 
-      <div className="rio-stats">
-        {[
-          { k: "UI Motion", v: "interações suaves e intencionais" },
-          { k: "Editorial", v: "layout com ritmo, escala e respiro" },
-          { k: "Rio · Web", v: "brasilidade sutil no sistema visual" },
-        ].map((item) => (
-          <div key={item.k} className="rio-stat rio-reveal">
-            <div>{item.k}</div>
-            <p>{item.v}</p>
+        <div className="rio-title">
+          <h2 className="rio-reveal">
+            Rio Editorial
+            <br />
+            System.
+            <SemiLogoSymbol className="rio-sym" />
+          </h2>
+        </div>
+
+        <div className="rio-grid">
+          <div className="rio-text rio-reveal">
+            <p>
+              Um sistema visual inspirado no Rio, em composição editorial, movimento suave e
+              identidade digital autoral.
+            </p>
+            <p>
+              Cada projeto funciona como uma página viva: hierarquia primeiro, movimento a
+              serviço da leitura e interação sem excesso.
+            </p>
           </div>
-        ))}
+        </div>
+
+        <div className="rio-stats">
+          {[
+            { k: "UI Motion", v: "interações suaves e intencionais" },
+            { k: "Editorial", v: "layout com ritmo, escala e respiro" },
+            { k: "Rio · Web", v: "brasilidade sutil no sistema visual" },
+          ].map((item) => (
+            <div key={item.k} className="rio-stat rio-reveal">
+              <div>{item.k}</div>
+              <p>{item.v}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
