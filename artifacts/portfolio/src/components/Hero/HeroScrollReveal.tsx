@@ -226,6 +226,7 @@ export function HeroScrollReveal({
               ["CREATIVE DESIGN (UX/UI)", "hero-descriptor--service"],
               ["DEVELOPMENT SOLUTIONS",   "hero-descriptor--service"],
               ["inspired by Rio",         "hero-descriptor--origin"],
+              ["Turn an idea into reality", "hero-descriptor--tagline"],
             ] as const).map(([text, cls]) => (
               <div className="hero-descriptor-clip" key={text}>
                 <span className={`hero-descriptor-inner ${cls}`}>{text}</span>

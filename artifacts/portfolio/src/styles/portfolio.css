@@ -307,6 +307,14 @@ img, svg {
   margin-top: 0.45rem;
 }
 
+.hero-descriptor--tagline {
+  font-size: clamp(0.64rem, 0.9vw, 0.86rem);
+  letter-spacing: 0.04em;
+  color: rgba(32, 29, 29, 0.32);
+  font-style: italic;
+  margin-top: 0.1rem;
+}
+
 .scroll-cue {
   position: absolute;
   left: 50%;
