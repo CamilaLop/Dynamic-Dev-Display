@@ -10,10 +10,11 @@ export function useLenis(active: boolean) {
     if (!active) return;
 
     const lenis = new Lenis({
-      duration: 1.45,
+      duration: 1.6,
+      lerp: 0.08,
       smoothWheel: true,
-      wheelMultiplier: 0.82,
-      touchMultiplier: 1.15,
+      wheelMultiplier: 0.72,
+      touchMultiplier: 1.05,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 

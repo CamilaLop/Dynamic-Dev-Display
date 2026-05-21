@@ -173,6 +173,15 @@ export function SelectedWork() {
           id: "workCarousel",
           invalidateOnRefresh: true,
           onRefresh: () => cardsTl.invalidate(),
+          snap: {
+            snapTo: (progress: number) => {
+              const step = 1 / (cards.length - 1);
+              return Math.round(progress / step) * step;
+            },
+            duration: { min: 0.15, max: 0.3 },
+            delay: 0,
+            ease: "power2.inOut",
+          },
         },
       });
 
