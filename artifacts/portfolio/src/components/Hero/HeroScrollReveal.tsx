@@ -101,7 +101,7 @@ export function HeroScrollReveal({
     if (!root.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(".hero-nav, .hero-bottom-name, .hero-bottom-meta", {
+      gsap.set(".hero-nav, .hero-bottom-name, .hero-bottom-meta, .hero-overlay-tagline", {
         yPercent: 120,
         opacity: 0,
       });
@@ -148,7 +148,7 @@ export function HeroScrollReveal({
         .to(".hero-letter", { opacity: 0, yPercent: -35, duration: 0.3 }, 0.42)
         .to(".hero-descriptors", { opacity: 0, yPercent: -32, duration: 0.26 }, 0.44)
         .to(
-          ".hero-nav, .hero-bottom-name, .hero-bottom-meta",
+          ".hero-nav, .hero-bottom-name, .hero-bottom-meta, .hero-overlay-tagline",
           {
             yPercent: 0,
             opacity: 1,
@@ -245,6 +245,8 @@ export function HeroScrollReveal({
               <FledgeLink href="#contact" label="Contact" />
             </div>
           </nav>
+
+          <p className="hero-overlay-tagline">inspired by Rio</p>
 
           <div className="hero-bottom">
             <h1 className="hero-bottom-name circular-text-reveal" data-text="Camila Lopes">Camila Lopes</h1>

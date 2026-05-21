@@ -343,6 +343,27 @@ img, svg {
 
 .hero-logo { color: var(--background); }
 
+.hero-logo .brand-logo__mark {
+  width: clamp(2rem, 3vw, 3.2rem);
+  height: clamp(2rem, 3vw, 3.2rem);
+}
+
+.hero-overlay-tagline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: clamp(0.82rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  font-style: italic;
+  color: rgba(244, 244, 241, 0.58);
+  white-space: nowrap;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
 .hero-links {
   display: flex;
   gap: clamp(1.25rem, 2vw, 2rem);
