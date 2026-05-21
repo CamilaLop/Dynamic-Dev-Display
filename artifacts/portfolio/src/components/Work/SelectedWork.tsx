@@ -266,6 +266,7 @@ export function SelectedWork() {
 
       const cursor = cursorRef.current;
       const carousel = root.current?.querySelector<HTMLElement>(".carousel-clip");
+      const cardEls = gsap.utils.toArray<HTMLElement>(".card");
 
       if (cursor && carousel) {
         const xSet = gsap.quickSetter(cursor, "x", "px");
@@ -284,15 +285,22 @@ export function SelectedWork() {
           gsap.to(cursor, { opacity: 0, scale: 0.4, duration: 0.28, ease: "power2.in", overwrite: true });
         };
 
+        // Track mouse position across full carousel area
         carousel.addEventListener("mousemove", onMove);
-        carousel.addEventListener("mouseenter", onEnter);
-        carousel.addEventListener("mouseleave", onLeave);
+
+        // But only activate the cursor visually when hovering an actual card
+        cardEls.forEach((card) => {
+          card.addEventListener("mouseenter", onEnter);
+          card.addEventListener("mouseleave", onLeave);
+        });
 
         return () => {
           arrowTl.kill();
           carousel.removeEventListener("mousemove", onMove);
-          carousel.removeEventListener("mouseenter", onEnter);
-          carousel.removeEventListener("mouseleave", onLeave);
+          cardEls.forEach((card) => {
+            card.removeEventListener("mouseenter", onEnter);
+            card.removeEventListener("mouseleave", onLeave);
+          });
         };
       }
 

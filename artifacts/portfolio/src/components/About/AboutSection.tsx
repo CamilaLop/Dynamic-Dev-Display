@@ -178,12 +178,6 @@ export function AboutSection() {
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          snap: {
-            snapTo: 1 / (panels.length - 1),
-            duration: { min: 0.2, max: 0.4 },
-            delay: 0,
-            ease: "power2.inOut",
-          },
         },
       });
 

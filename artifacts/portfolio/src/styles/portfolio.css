@@ -113,35 +113,19 @@ body {
   will-change: transform, opacity;
 }
 
-/* ── Custom cursor ── */
-body { cursor: none; }
-a, button, [role="button"] { cursor: none; }
+/* ── Custom cursor — circle with blend mode ── */
+*, *::before, *::after { cursor: none !important; }
 
-.c-dot {
+.c-cursor {
   position: fixed;
-  top: -4px;
-  left: -4px;
-  width: 8px;
-  height: 8px;
+  top: -24px;
+  left: -24px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: var(--foreground);
+  background: #f4f4f1;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0;
-  will-change: transform;
-  mix-blend-mode: difference;
-}
-
-.c-ring {
-  position: fixed;
-  top: -20px;
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px solid var(--foreground);
-  pointer-events: none;
-  z-index: 9998;
   opacity: 0;
   will-change: transform;
   mix-blend-mode: difference;
