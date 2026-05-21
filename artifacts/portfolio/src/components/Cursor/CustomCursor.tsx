@@ -40,6 +40,13 @@ export function CustomCursor() {
     const onLeaveInteractive = () => {
       gsap.to(el, { scale: 1, duration: 0.38, ease: "power2.out", overwrite: true });
     };
+    // nav links + tagline → cursor SHRINKS instead of enlarging
+    const onEnterShrink = () => {
+      gsap.to(el, { scale: 0.28, duration: 0.35, ease: "power2.out", overwrite: true });
+    };
+    const onLeaveShrink = () => {
+      gsap.to(el, { scale: 1, duration: 0.35, ease: "power2.out", overwrite: true });
+    };
     const onLeaveWindow = () => gsap.to(el, { opacity: 0, duration: 0.3 });
     const onEnterWindow = () => { if (visible) gsap.to(el, { opacity: 1, duration: 0.3 }); };
 
@@ -47,7 +54,10 @@ export function CustomCursor() {
     document.addEventListener("mouseleave", onLeaveWindow);
     document.addEventListener("mouseenter", onEnterWindow);
 
-    const INTERACTIVE = "a, button, .experience-item, .work-card-dot, .footer-cta, .footer-link";
+    // enlarge: everything interactive except nav/fledge links
+    const INTERACTIVE = "a:not(.fledge-link):not(.hero-overlay-tagline), button, .experience-item, .work-card-dot, .footer-cta, .footer-link";
+    // shrink: nav links and the big tagline
+    const SHRINK = ".fledge-link, .hero-overlay-tagline";
 
     const attachListeners = () => {
       document.querySelectorAll<HTMLElement>(INTERACTIVE).forEach((node) => {
@@ -55,6 +65,12 @@ export function CustomCursor() {
         node.dataset.cursorBound = "1";
         node.addEventListener("mouseenter", onEnterInteractive);
         node.addEventListener("mouseleave", onLeaveInteractive);
+      });
+      document.querySelectorAll<HTMLElement>(SHRINK).forEach((node) => {
+        if (node.dataset.cursorShrinkBound) return;
+        node.dataset.cursorShrinkBound = "1";
+        node.addEventListener("mouseenter", onEnterShrink);
+        node.addEventListener("mouseleave", onLeaveShrink);
       });
     };
     attachListeners();

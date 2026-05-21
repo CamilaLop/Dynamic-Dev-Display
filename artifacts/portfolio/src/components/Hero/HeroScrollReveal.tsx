@@ -246,7 +246,15 @@ export function HeroScrollReveal({
             </div>
           </nav>
 
-          <p className="hero-overlay-tagline">inspired by Rio</p>
+          <p className="hero-overlay-tagline">
+            <span className="fledge-word">
+              {"inspired by Rio".split("").map((char, i) => (
+                <span key={i} className="fledge-char" data-char={char === " " ? "\u00A0" : char}>
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </span>
+          </p>
 
           <div className="hero-bottom">
             <h1 className="hero-bottom-name circular-text-reveal" data-text="Camila Lopes">Camila Lopes</h1>

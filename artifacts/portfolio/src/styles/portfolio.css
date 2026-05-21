@@ -336,16 +336,23 @@ img, svg {
 }
 
 .hero-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  padding: clamp(0.9rem, 1.8vw, 1.5rem) clamp(1.2rem, 3.5vw, 3.5rem);
+  pointer-events: auto;
 }
 
 .hero-logo { color: var(--background); }
 
 .hero-logo .brand-logo__mark {
-  width: clamp(2rem, 3vw, 3.2rem);
-  height: clamp(2rem, 3vw, 3.2rem);
+  width: clamp(1rem, 1.4vw, 1.5rem);
+  height: clamp(1rem, 1.4vw, 1.5rem);
 }
 
 .hero-overlay-tagline {
@@ -354,15 +361,18 @@ img, svg {
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
-  font-size: clamp(0.82rem, 1.2vw, 1.1rem);
-  letter-spacing: 0.12em;
+  font-size: clamp(2.2rem, 4.5vw, 5rem);
+  letter-spacing: -0.01em;
   text-transform: lowercase;
   font-style: italic;
-  color: rgba(244, 244, 241, 0.58);
+  color: transparent;
   white-space: nowrap;
   will-change: transform, opacity;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
 }
+.hero-overlay-tagline .fledge-char::before { color: rgba(244, 244, 241, 0.52); }
+.hero-overlay-tagline .fledge-char::after  { color: rgba(244, 244, 241, 0.94); }
 
 .hero-links {
   display: flex;
