@@ -49,10 +49,13 @@ export function AboutSection() {
       gsap.set(".about-id-meta__col", { y: 28, opacity: 0 });
       gsap.set(".about-bio", { y: 24, opacity: 0 });
       gsap.set(".about-photo-img", {
-        scale: 1.2,
+        scale: 1.3,
         filter: "grayscale(1) contrast(1.12) brightness(0.78)",
       });
-      gsap.set(".about-photo-mask", { clipPath: "inset(44% 38% 44% 38%)" });
+      // cortina fechada — polygon idêntico ao CodePen de inspiração
+      gsap.set(".about-photo-mask", {
+        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+      });
       gsap.set(".about-cap-item", { x: -44, opacity: 0 });
       gsap.set(".about-stat-num", { y: 48, opacity: 0 });
       gsap.set(".about-skill-loader", { y: 56, opacity: 0 });
@@ -115,7 +118,6 @@ export function AboutSection() {
           duration: N,
         })
         .to(".about-photo-img", {
-          scale: 1.06,
           xPercent: 5,
           ease: "none",
           duration: N,
@@ -125,18 +127,20 @@ export function AboutSection() {
           ease: "none",
           duration: N,
         }, 0)
-        // ── Photo growth: clipPath pequena → meia tela durante a viagem para o painel 2 ──
-        // começa 0.35 painéis depois do início, dura 1.3 painéis (chega no meio do painel 2)
-        .to(".about-photo-mask", {
-          clipPath: "inset(25% 25% 25% 25%)",
-          ease: "power1.inOut",
-          duration: 1.3,
-        }, 0.35)
-        .to(".about-photo-img", {
-          filter: "grayscale(0) contrast(1.02) brightness(0.92)",
-          ease: "none",
-          duration: 1.3,
-        }, 0.35);
+        // ── Reveal: cortina sobe de baixo quando o painel 2 entra em cena ──
+        // posição 0.72 = ~72% do painel 1 percorrido (painel 2 quase visível)
+        // duração 0.88 = termina em 1.60, bem dentro do painel 2
+        .fromTo(".about-photo-mask",
+          { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" },
+          { clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)", ease: "power3.out", duration: 0.88 },
+          0.72
+        )
+        // escala + cor revelam junto com a cortina (escala dura mais, como no CodePen)
+        .fromTo(".about-photo-img",
+          { scale: 1.3, filter: "grayscale(1) contrast(1.12) brightness(0.78)" },
+          { scale: 1, filter: "grayscale(0) contrast(1) brightness(0.95)", ease: "power2.out", duration: 1.6 },
+          0.72
+        );
 
       // ── Capabilities list: panel 3 (index 2) ───────
       gsap.timeline({
