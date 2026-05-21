@@ -188,11 +188,11 @@ export function HeroScrollReveal({
   return (
     <section ref={root} className="hero-section">
       <div className="hero-camera">
-        <div className="hero-center">
+        <div className="hero-center ml-[0px] mr-[0px]">
           <div className="hero-title-wrap">
             <div className="hero-name-start hero-name">
               {firstName.map((letter, i) => (
-                <span className="hero-letter" key={`${letter}-${i}`}>
+                <span className="hero-letter pl-[6px] pr-[6px]" key={`${letter}-${i}`}>
                   {letter}
                 </span>
               ))}
@@ -207,7 +207,7 @@ export function HeroScrollReveal({
 
             <div className="hero-name-end hero-name">
               {lastName.map((letter, i) => (
-                <span className="hero-letter" key={`${letter}-${i}`}>
+                <span className="hero-letter ml-[0px] mr-[0px] pl-[6px] pr-[6px]" key={`${letter}-${i}`}>
                   {letter}
                 </span>
               ))}
