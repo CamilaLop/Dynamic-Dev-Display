@@ -312,7 +312,7 @@ img, svg {
   perspective: 300px;
   overflow: visible;
   opacity: 1 !important;
-  background: #f4f4f1;
+  background: #201d1d;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
