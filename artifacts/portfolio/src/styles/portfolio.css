@@ -271,11 +271,40 @@ img, svg {
   background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.05) 48%, rgba(0, 0, 0, 0.5) 100%);
 }
 
-.hero-kicker {
+.hero-descriptors {
   position: absolute;
-  top: clamp(1.5rem, 3vw, 2.5rem);
+  bottom: clamp(3.5rem, 7vw, 5.5rem);
   left: clamp(1.5rem, 3vw, 2.5rem);
-  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  z-index: 5;
+}
+
+.hero-descriptor-clip {
+  overflow: hidden;
+  line-height: 1.15;
+}
+
+.hero-descriptor-inner {
+  display: block;
+  will-change: transform;
+}
+
+.hero-descriptor--service {
+  font-size: clamp(0.62rem, 0.95vw, 0.92rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(32, 29, 29, 0.75);
+  font-weight: 500;
+}
+
+.hero-descriptor--origin {
+  font-size: clamp(0.68rem, 0.92vw, 0.88rem);
+  letter-spacing: 0.05em;
+  color: rgba(32, 29, 29, 0.42);
+  font-style: italic;
+  margin-top: 0.45rem;
 }
 
 .scroll-cue {

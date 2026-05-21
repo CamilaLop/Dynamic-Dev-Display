@@ -54,7 +54,8 @@ export function HeroScrollReveal({
         clipPath: "inset(44% 48% 44% 48%)",
       });
       gsap.set(".hero-image-inner", { scale: 1.22, yPercent: 4 });
-      gsap.set([".hero-kicker", ".scroll-cue"], { yPercent: 40, opacity: 0 });
+      gsap.set(".hero-descriptor-inner", { yPercent: 115 });
+      gsap.set(".scroll-cue", { yPercent: 40, opacity: 0 });
 
       const tl = gsap.timeline({
         defaults: { ease: "expo.out" },
@@ -84,7 +85,13 @@ export function HeroScrollReveal({
           "-=0.78"
         )
         .to(".hero-image-inner", { scale: 1.08, yPercent: 0, duration: 1.4 }, "<")
-        .to([".hero-kicker", ".scroll-cue"], { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.08 }, "-=0.45");
+        .to(".hero-descriptor-inner", {
+          yPercent: 0,
+          duration: 0.88,
+          stagger: 0.14,
+          ease: "expo.out",
+        }, "-=0.42")
+        .to(".scroll-cue", { yPercent: 0, opacity: 1, duration: 0.72, ease: "expo.out" }, "-=0.58");
     }, root);
 
     return () => ctx.revert();
@@ -139,7 +146,7 @@ export function HeroScrollReveal({
         )
         .to(".hero-vignette", { opacity: 1, duration: 0.55 }, 0.38)
         .to(".hero-letter", { opacity: 0, yPercent: -35, duration: 0.3 }, 0.42)
-        .to(".hero-kicker", { opacity: 0, yPercent: -50, duration: 0.22 }, 0.48)
+        .to(".hero-descriptors", { opacity: 0, yPercent: -32, duration: 0.26 }, 0.44)
         .to(
           ".hero-nav, .hero-bottom-name, .hero-bottom-meta",
           {
@@ -214,7 +221,17 @@ export function HeroScrollReveal({
             </div>
           </div>
 
-          <div className="hero-kicker">Creative Developer · Rio Editorial System</div>
+          <div className="hero-descriptors" aria-label="Services and origin">
+            {([
+              ["CREATIVE DESIGN (UX/UI)", "hero-descriptor--service"],
+              ["DEVELOPMENT SOLUTIONS",   "hero-descriptor--service"],
+              ["inspired by Rio",         "hero-descriptor--origin"],
+            ] as const).map(([text, cls]) => (
+              <div className="hero-descriptor-clip" key={text}>
+                <span className={`hero-descriptor-inner ${cls}`}>{text}</span>
+              </div>
+            ))}
+          </div>
           <div className="scroll-cue">Scroll</div>
         </div>
 
