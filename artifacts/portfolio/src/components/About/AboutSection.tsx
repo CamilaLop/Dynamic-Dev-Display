@@ -183,7 +183,7 @@ export function AboutSection() {
 
       horizontalTl
         .to(track, {
-          xPercent: -100 * (panels.length - 1),
+          x: () => -(panels.length - 1) * window.innerWidth,
           ease: "none",
         })
         .to(".about-photo-img", {

@@ -104,7 +104,7 @@ export function HeroScrollReveal({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end: "+=320%",
+          end: "+=240%",
           pin: true,
           scrub: 1.18,
           anticipatePin: 1,
