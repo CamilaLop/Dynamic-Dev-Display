@@ -7,67 +7,18 @@ import aboutPhoto from "@assets/camila-about-profile_1779253450406.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const capabilities = [
-  {
-    n: "01",
-    title: "Front-end architecture",
-    text: "React, Next.js, TypeScript \u2014 components built for scale, performance, and maintainability.",
-  },
-  {
-    n: "02",
-    title: "Visual motion systems",
-    text: "GSAP, Lenis, ScrollTrigger \u2014 scroll-driven storytelling with cinematic timing.",
-  },
-  {
-    n: "03",
-    title: "Product & conversion",
-    text: "Landing pages, dashboards, and e-commerce flows that balance beauty with business.",
-  },
-  {
-    n: "04",
-    title: "Design to code",
-    text: "From Figma to production \u2014 pixel-perfect implementation with design-system thinking.",
-  },
-];
-
-const highlights = [
-  {
-    n: "01",
-    title: "Creative front-end",
-    text: "Interfaces with visual identity, technical precision, and motion with intention.",
-  },
-  {
-    n: "02",
-    title: "Product thinking",
-    text: "Experiences that unite clarity, conversion, narrative, and scalable architecture.",
-  },
-  {
-    n: "03",
-    title: "Editorial motion",
-    text: "Scroll, composition, and micro-interactions treated as part of the visual system.",
-  },
+  { n: "01", title: "Front-end architecture" },
+  { n: "02", title: "Motion & scroll systems" },
+  { n: "03", title: "Design to production" },
+  { n: "04", title: "Editorial interfaces" },
+  { n: "05", title: "Product UI & dashboards" },
 ];
 
 const skillMeters = [
-  {
-    label: "Front-end",
-    value: 92,
-    detail: "React \u00B7 Next.js \u00B7 TypeScript",
-  },
-  {
-    label: "Motion visual",
-    value: 88,
-    detail: "GSAP \u00B7 Lenis \u00B7 ScrollTrigger",
-  },
-  {
-    label: "Design",
-    value: 84,
-    detail: "UI/UX \u00B7 Design systems \u00B7 Editorial layout",
-  },
-  {
-    label: "Back-end",
-    value: 72,
-    detail: "PostgreSQL \u00B7 Prisma \u00B7 APIs",
-  },
+  { label: "Front-end",   value: 92, detail: "React \u00B7 Next.js \u00B7 TypeScript" },
+  { label: "Motion",      value: 88, detail: "GSAP \u00B7 Lenis \u00B7 ScrollTrigger" },
+  { label: "Design",      value: 84, detail: "UI/UX \u00B7 Design systems \u00B7 Editorial" },
+  { label: "Back-end",    value: 72, detail: "PostgreSQL \u00B7 Prisma \u00B7 APIs" },
 ];
 
 export function AboutSection() {
@@ -76,16 +27,11 @@ export function AboutSection() {
   useEffect(() => {
     const section = root.current;
     if (!section) return;
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        section.classList.toggle("is-in-view", entry.isIntersecting);
-      },
+      ([entry]) => section.classList.toggle("is-in-view", entry.isIntersecting),
       { threshold: 0.18 }
     );
-
     observer.observe(section);
-
     return () => observer.disconnect();
   }, []);
 
@@ -96,93 +42,60 @@ export function AboutSection() {
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray<HTMLElement>(".about-panel");
       const track = section.querySelector<HTMLElement>(".about-horizontal-track");
-
       if (!track || !panels.length) return;
 
-      gsap.set(".about-panel-content", {
-        y: 86,
-        opacity: 0,
-      });
-
-      gsap.set(".about-skill-loader", {
-        y: 64,
-        opacity: 0,
-      });
-
-      gsap.set(".about-skill-loader__bar", {
-        scaleX: 0,
-        transformOrigin: "left center",
-      });
-
-      gsap.set(".about-highlight", {
-        y: 42,
-        opacity: 0,
-      });
-
-      gsap.set(".about-title-word", {
-        yPercent: 112,
-        opacity: 0,
-      });
-
+      // ── Initial states ──────────────────────────────
+      gsap.set(".about-display__line", { yPercent: 110, opacity: 0 });
+      gsap.set(".about-id-meta__col", { y: 28, opacity: 0 });
+      gsap.set(".about-bio", { y: 24, opacity: 0 });
       gsap.set(".about-photo-img", {
         scale: 1.2,
-        xPercent: -4,
         filter: "grayscale(1) contrast(1.12) brightness(0.78)",
       });
+      gsap.set(".about-photo-mask", { clipPath: "inset(0% 0% 100% 0%)" });
+      gsap.set(".about-cap-item", { x: -44, opacity: 0 });
+      gsap.set(".about-stat-num", { y: 48, opacity: 0 });
+      gsap.set(".about-skill-loader", { y: 56, opacity: 0 });
+      gsap.set(".about-skill-loader__bar", { scaleX: 0, transformOrigin: "left center" });
 
-      gsap.set(".about-photo-mask", {
-        clipPath: "inset(12% 18% 12% 18% round 2rem)",
-      });
-
-      gsap.set(".about-capability", {
-        y: 48,
-        opacity: 0,
-      });
-
+      // ── Intro TL (section scrolls into view, before pin) ──
       const introTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 82%",
-          end: "top 24%",
+          start: "top 84%",
+          end: "top 22%",
           scrub: 1.05,
         },
       });
 
       introTl
-        .to(".about-title-word", {
+        .to(".about-display__line", {
           yPercent: 0,
           opacity: 1,
-          stagger: 0.025,
-          duration: 0.45,
+          stagger: 0.06,
+          duration: 0.52,
           ease: "power3.out",
-        }, 0.08)
-        .to(".about-panel-content", {
+        }, 0.05)
+        .to(".about-id-meta__col", {
           y: 0,
           opacity: 1,
           stagger: 0.04,
           duration: 0.42,
           ease: "power3.out",
-        }, 0.18)
-        .to(".about-photo-mask", {
-          clipPath: "inset(0% 0% 0% 0% round 1.4rem)",
-          duration: 0.52,
-          ease: "power3.out",
         }, 0.22)
-        .to(".about-capability", {
+        .to(".about-bio", {
           y: 0,
           opacity: 1,
-          stagger: 0.07,
           duration: 0.4,
           ease: "power3.out",
-        }, 0.52)
-        .to(".about-highlight", {
-          y: 0,
-          opacity: 1,
-          duration: 0.36,
-          stagger: 0.06,
-          ease: "power3.out",
-        }, 0.52);
+        }, 0.38)
+        .to(".about-photo-mask", {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.58,
+          ease: "power3.inOut",
+        }, 0.42);
 
+      // ── Horizontal scroll ───────────────────────────
       const horizontalTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -201,8 +114,8 @@ export function AboutSection() {
           ease: "none",
         })
         .to(".about-photo-img", {
-          scale: 1.04,
-          xPercent: 6,
+          scale: 1.06,
+          xPercent: 5,
           ease: "none",
         }, 0)
         .to(".about-progress-line", {
@@ -210,35 +123,56 @@ export function AboutSection() {
           ease: "none",
         }, 0);
 
-      const skillLoaders = gsap.utils.toArray<HTMLElement>(".about-skill-loader");
+      // ── Capabilities list: panel 3 (index 2) ───────
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: () => `top+=${window.innerWidth * 1.55} top`,
+          end: () => `top+=${window.innerWidth * 2.35} top`,
+          scrub: 1.05,
+        },
+      }).to(".about-cap-item", {
+        x: 0,
+        opacity: 1,
+        stagger: 0.09,
+        duration: 0.45,
+        ease: "power3.out",
+      });
 
+      // ── Stats: panel 4 (index 3) ────────────────────
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: () => `top+=${window.innerWidth * 2.55} top`,
+          end: () => `top+=${window.innerWidth * 3.1} top`,
+          scrub: 1.05,
+        },
+      }).to(".about-stat-num", {
+        y: 0,
+        opacity: 1,
+        stagger: 0.06,
+        duration: 0.42,
+        ease: "power3.out",
+      });
+
+      // ── Skill loaders: panel 4 ──────────────────────
+      const skillLoaders = gsap.utils.toArray<HTMLElement>(".about-skill-loader");
       skillLoaders.forEach((loader) => {
         const value = Number(loader.style.getPropertyValue("--target")) || 0;
         const number = loader.querySelector<HTMLElement>(".about-skill-loader__number");
         const bar = loader.querySelector<HTMLElement>(".about-skill-loader__bar");
         const counter = { value: 0 };
 
-        const skillTl = gsap.timeline({
+        gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: () => `top+=${window.innerWidth * 2.35} top`,
-            end: () => `top+=${window.innerWidth * 3.05} top`,
+            start: () => `top+=${window.innerWidth * 2.72} top`,
+            end: () => `top+=${window.innerWidth * 3.38} top`,
             scrub: 1.05,
           },
-        });
-
-        skillTl
-          .to(loader, {
-            y: 0,
-            opacity: 1,
-            duration: 0.34,
-            ease: "power3.out",
-          }, 0)
-          .to(bar, {
-            scaleX: value / 100,
-            duration: 0.72,
-            ease: "power3.out",
-          }, 0.08)
+        })
+          .to(loader, { y: 0, opacity: 1, duration: 0.34, ease: "power3.out" }, 0)
+          .to(bar, { scaleX: value / 100, duration: 0.72, ease: "power3.out" }, 0.1)
           .to(counter, {
             value,
             duration: 0.72,
@@ -246,53 +180,26 @@ export function AboutSection() {
             onUpdate: () => {
               if (number) number.textContent = String(Math.round(counter.value));
             },
-          }, 0.08);
+          }, 0.1);
       });
 
+      // ── Panel crossfade ─────────────────────────────
       panels.forEach((panel, index) => {
-        const content = panel.querySelector(".about-panel-content");
-
-        // Panel-level cinematic crossfade: dimmed + scaled when off-center,
-        // bright + sharp when in the viewport center
         gsap.fromTo(
           panel,
-          {
-            opacity: 0.2,
-            scale: 0.97,
-            filter: "brightness(1.08)",
-          },
+          { opacity: index === 0 ? 1 : 0.12, scale: index === 0 ? 1 : 0.975 },
           {
             opacity: 1,
             scale: 1,
-            filter: "brightness(1)",
             ease: "none",
             scrollTrigger: {
               trigger: section,
-              start: () => `top+=${window.innerWidth * Math.max(0, index - 0.55)} top`,
-              end: () => `top+=${window.innerWidth * Math.min(panels.length - 1, index + 0.55)} top`,
+              start: () => `top+=${window.innerWidth * Math.max(0, index - 0.62)} top`,
+              end: () => `top+=${window.innerWidth * Math.min(panels.length - 1, index + 0.62)} top`,
               scrub: true,
             },
           }
         );
-
-        // Content entrance: rises from below with staggered opacity
-        if (content) {
-          gsap.fromTo(
-            content,
-            { y: 70, opacity: 0.15 },
-            {
-              y: 0,
-              opacity: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: () => `top+=${window.innerWidth * Math.max(0, index - 0.75)} top`,
-                end: () => `top+=${window.innerWidth * (index + 0.12)} top`,
-                scrub: 1.05,
-              },
-            }
-          );
-        }
       });
 
       ScrollTrigger.refresh();
@@ -308,88 +215,109 @@ export function AboutSection() {
       </div>
 
       <div className="about-horizontal-track">
-        {/* Panel 1: Editorial intro */}
-        <article className="about-panel about-panel--intro">
-          <div className="about-panel-content">
-            <span className="about-panel-index" aria-hidden="true">03</span>
-            <p className="about-kicker">&mdash; About / Camila Lopes</p>
 
-            <h2 className="about-title" aria-label="Creative developer with editorial precision">
-              {"Creative developer".split(" ").map((word, index) => (
-                <span className="clip" key={`${word}-${index}`}>
-                  <span className="about-title-word">
-                    {word}
-                    {index < 2 ? "\u00A0" : ""}
-                  </span>
-                </span>
-              ))}
-              <br />
-              {"with editorial".split(" ").map((word, index) => (
-                <span className="clip" key={`${word}-b-${index}`}>
-                  <span className="about-title-word">
-                    {word}
-                    {index < 2 ? "\u00A0" : ""}
-                  </span>
-                </span>
-              ))}
-              <br />
+        {/* ── Panel 1 — Identity statement ── */}
+        <article className="about-panel about-panel--identity">
+          <div className="about-panel-content">
+            <div className="about-id-top">
+              <p className="about-kicker">&mdash;&nbsp;03&nbsp;/ About</p>
+              <time className="about-year">2026</time>
+            </div>
+
+            <h2 className="about-display" aria-label="Camila Lopes">
               <span className="clip">
-                <span className="about-title-word">precision</span>
+                <span className="about-display__line about-display__line--em">Camila</span>
+              </span>
+              <span className="clip">
+                <span className="about-display__line">Lopes.</span>
               </span>
             </h2>
 
-            <p className="about-lead">
-              Desenvolvedora front-end com olhar de designer. Eu projeto interfaces que combinam
-              est\u00E9tica editorial, performance, arquitetura de componentes e movimento com prop\u00F3sito.
+            <hr className="about-rule" />
+
+            <dl className="about-id-meta">
+              <div className="about-id-meta__col">
+                <dt>Role</dt>
+                <dd>Creative Developer</dd>
+              </div>
+              <div className="about-id-meta__col">
+                <dt>Location</dt>
+                <dd>Rio de Janeiro</dd>
+              </div>
+              <div className="about-id-meta__col">
+                <dt>Focus</dt>
+                <dd>Front-end + Motion + UI</dd>
+              </div>
+              <div className="about-id-meta__col">
+                <dt>Status</dt>
+                <dd className="about-status--available">Available</dd>
+              </div>
+            </dl>
+
+            <p className="about-bio">
+              Desenvolvedora front-end com olhar de designer. Interfaces que combinam
+              est&eacute;tica editorial, performance e movimento com prop&oacute;sito.
             </p>
           </div>
         </article>
 
-        {/* Panel 2: Editorial photo */}
+        {/* ── Panel 2 — Portrait full-bleed ── */}
         <article className="about-panel about-panel--photo">
           <div className="about-photo-frame">
             <div className="about-photo-mask">
-              <img className="about-photo-img" src={aboutPhoto} alt="Retrato editorial de Camila Lopes" />
+              <img
+                className="about-photo-img"
+                src={aboutPhoto}
+                alt="Retrato editorial de Camila Lopes"
+              />
             </div>
-            <div className="about-photo-overlay" aria-hidden="true">
-              <span className="about-panel-index about-index--light">03</span>
+            <div className="about-photo-overlay">
+              <span className="about-photo-idx" aria-hidden="true">02</span>
               <p>Based in Brazil &middot; building refined digital interfaces for recruiters, studios and independent brands.</p>
             </div>
           </div>
         </article>
 
-        {/* Panel 3: Capabilities grid */}
-        <article className="about-panel about-panel--capabilities">
+        {/* ── Panel 3 — Capabilities list ── */}
+        <article className="about-panel about-panel--caps">
           <div className="about-panel-content">
-            <p className="about-kicker">&mdash; What I bring</p>
-            <h3 className="about-panel-title">Design sensibility with front-end execution.</h3>
-
-            <div className="about-capability-grid">
-              {capabilities.map((cap) => (
-                <div className="about-capability" key={cap.n}>
-                  <span>{cap.n}</span>
-                  <h4>{cap.title}</h4>
-                  <p>{cap.text}</p>
-                </div>
-              ))}
+            <div className="about-caps-header">
+              <p className="about-kicker">&mdash;&nbsp;What I build</p>
+              <h3 className="about-caps-title">
+                Design sensibility<br />
+                with front-end<br />
+                execution.
+              </h3>
             </div>
+            <ol className="about-caps-list">
+              {capabilities.map((cap) => (
+                <li className="about-cap-item" key={cap.n}>
+                  <span>{cap.n}</span>
+                  <strong>{cap.title}</strong>
+                </li>
+              ))}
+            </ol>
           </div>
         </article>
 
-        {/* Panel 4: Highlights + meters */}
-        <article className="about-panel about-panel--highlights">
+        {/* ── Panel 4 — Numbers + skill meters ── */}
+        <article className="about-panel about-panel--numbers">
           <div className="about-panel-content">
-            <p className="about-kicker">&mdash; For recruiters</p>
-            <h3 className="about-panel-title">I build the layer users feel first.</h3>
+            <p className="about-kicker">&mdash;&nbsp;Expertise &amp; availability</p>
 
-            <div className="about-highlight-grid">
-              {highlights.map((item) => (
-                <div className="about-highlight" key={item.n}>
-                  <span>{item.n}</span>
-                  <h4>{item.title}</h4>
-                  <p>{item.text}</p>
-                </div>
-              ))}
+            <div className="about-stats">
+              <div className="about-stat">
+                <strong className="about-stat-num">3+</strong>
+                <span className="about-stat-label">Years building</span>
+              </div>
+              <div className="about-stat">
+                <strong className="about-stat-num">40+</strong>
+                <span className="about-stat-label">Projects shipped</span>
+              </div>
+              <div className="about-stat">
+                <strong className="about-stat-num">18</strong>
+                <span className="about-stat-label">Core technologies</span>
+              </div>
             </div>
 
             <div className="about-skill-loaders" aria-label="Skill quality meters">
@@ -406,17 +334,16 @@ export function AboutSection() {
                       <em>/100</em>
                     </strong>
                   </div>
-
                   <div className="about-skill-loader__track" aria-hidden="true">
                     <span className="about-skill-loader__bar" />
                   </div>
-
                   <p>{skill.detail}</p>
                 </div>
               ))}
             </div>
           </div>
         </article>
+
       </div>
     </section>
   );
