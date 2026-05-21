@@ -315,8 +315,7 @@ export function SelectedWork() {
           </p>
         </div>
       </div>
-
-      <main className="index02-main">
+      <main className="index02-main opacity-[1] bg-[#211d1d]">
         <div className="carousel-clip">
           <div className="carousel">
             {cards.map((card, index) => (
@@ -365,7 +364,6 @@ export function SelectedWork() {
           <path stroke="#333" d="M0,0 0,0" />
         </svg>
       </main>
-
       <div
         ref={cursorRef}
         className="work-card-cursor"
