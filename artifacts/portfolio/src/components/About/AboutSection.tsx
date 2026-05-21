@@ -6,42 +6,44 @@ import aboutPhoto from "@assets/camila-about-profile_1779253450406.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const skills = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Next.js",
-  "GSAP",
-  "Lenis",
-  "UI Motion",
-  "Design Systems",
-  "Landing Pages",
-  "Dashboards",
-  "PostgreSQL",
-  "Prisma",
-  "SQLite",
-  "Supabase",
-  "Stripe",
-  "Python",
-  "REST APIs",
-  "UI/UX",
+const capabilities = [
+  {
+    n: "01",
+    title: "Front-end architecture",
+    text: "React, Next.js, TypeScript \u2014 components built for scale, performance, and maintainability.",
+  },
+  {
+    n: "02",
+    title: "Visual motion systems",
+    text: "GSAP, Lenis, ScrollTrigger \u2014 scroll-driven storytelling with cinematic timing.",
+  },
+  {
+    n: "03",
+    title: "Product & conversion",
+    text: "Landing pages, dashboards, and e-commerce flows that balance beauty with business.",
+  },
+  {
+    n: "04",
+    title: "Design to code",
+    text: "From Figma to production \u2014 pixel-perfect implementation with design-system thinking.",
+  },
 ];
 
 const highlights = [
   {
     n: "01",
     title: "Creative front-end",
-    text: "Interfaces com identidade visual, precisão técnica e movimento com intenção.",
+    text: "Interfaces with visual identity, technical precision, and motion with intention.",
   },
   {
     n: "02",
     title: "Product thinking",
-    text: "Experiências que unem clareza, conversão, narrativa e construção escalável.",
+    text: "Experiences that unite clarity, conversion, narrative, and scalable architecture.",
   },
   {
     n: "03",
     title: "Editorial motion",
-    text: "Scroll, composição e microinterações tratados como parte do sistema visual.",
+    text: "Scroll, composition, and micro-interactions treated as part of the visual system.",
   },
 ];
 
@@ -49,22 +51,22 @@ const skillMeters = [
   {
     label: "Front-end",
     value: 92,
-    detail: "React · Next.js · TypeScript",
+    detail: "React \u00B7 Next.js \u00B7 TypeScript",
   },
   {
     label: "Motion visual",
     value: 88,
-    detail: "GSAP · Lenis · ScrollTrigger",
+    detail: "GSAP \u00B7 Lenis \u00B7 ScrollTrigger",
   },
   {
     label: "Design",
     value: 84,
-    detail: "UI/UX · Design systems · Editorial layout",
+    detail: "UI/UX \u00B7 Design systems \u00B7 Editorial layout",
   },
   {
     label: "Back-end",
     value: 72,
-    detail: "PostgreSQL · Prisma · APIs",
+    detail: "PostgreSQL \u00B7 Prisma \u00B7 APIs",
   },
 ];
 
@@ -132,6 +134,11 @@ export function AboutSection() {
         clipPath: "inset(12% 18% 12% 18% round 2rem)",
       });
 
+      gsap.set(".about-capability", {
+        y: 48,
+        opacity: 0,
+      });
+
       const introTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -161,6 +168,13 @@ export function AboutSection() {
           duration: 0.52,
           ease: "power3.out",
         }, 0.22)
+        .to(".about-capability", {
+          y: 0,
+          opacity: 1,
+          stagger: 0.07,
+          duration: 0.4,
+          ease: "power3.out",
+        }, 0.52)
         .to(".about-highlight", {
           y: 0,
           opacity: 1,
@@ -189,10 +203,6 @@ export function AboutSection() {
         .to(".about-photo-img", {
           scale: 1.04,
           xPercent: 6,
-          ease: "none",
-        }, 0)
-        .to(".about-orbit", {
-          rotate: 220,
           ease: "none",
         }, 0)
         .to(".about-progress-line", {
@@ -242,23 +252,47 @@ export function AboutSection() {
       panels.forEach((panel, index) => {
         const content = panel.querySelector(".about-panel-content");
 
-        if (!content) return;
-
+        // Panel-level cinematic crossfade: dimmed + scaled when off-center,
+        // bright + sharp when in the viewport center
         gsap.fromTo(
-          content,
-          { y: 70, opacity: index === 0 ? 1 : 0.2 },
+          panel,
           {
-            y: 0,
+            opacity: 0.2,
+            scale: 0.97,
+            filter: "brightness(1.08)",
+          },
+          {
             opacity: 1,
+            scale: 1,
+            filter: "brightness(1)",
             ease: "none",
             scrollTrigger: {
               trigger: section,
-              start: () => `top+=${window.innerWidth * Math.max(0, index - 0.85)} top`,
-              end: () => `top+=${window.innerWidth * (index + 0.15)} top`,
-              scrub: 1.05,
+              start: () => `top+=${window.innerWidth * Math.max(0, index - 0.55)} top`,
+              end: () => `top+=${window.innerWidth * Math.min(panels.length - 1, index + 0.55)} top`,
+              scrub: true,
             },
           }
         );
+
+        // Content entrance: rises from below with staggered opacity
+        if (content) {
+          gsap.fromTo(
+            content,
+            { y: 70, opacity: 0.15 },
+            {
+              y: 0,
+              opacity: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: () => `top+=${window.innerWidth * Math.max(0, index - 0.75)} top`,
+                end: () => `top+=${window.innerWidth * (index + 0.12)} top`,
+                scrub: 1.05,
+              },
+            }
+          );
+        }
       });
 
       ScrollTrigger.refresh();
@@ -274,69 +308,78 @@ export function AboutSection() {
       </div>
 
       <div className="about-horizontal-track">
+        {/* Panel 1: Editorial intro */}
         <article className="about-panel about-panel--intro">
           <div className="about-panel-content">
-            <p className="about-kicker">— About / Camila Lopes</p>
+            <span className="about-panel-index" aria-hidden="true">03</span>
+            <p className="about-kicker">&mdash; About / Camila Lopes</p>
 
             <h2 className="about-title" aria-label="Creative developer with editorial precision">
-              {"Creative developer with editorial precision".split(" ").map((word, index) => (
+              {"Creative developer".split(" ").map((word, index) => (
                 <span className="clip" key={`${word}-${index}`}>
                   <span className="about-title-word">
                     {word}
-                    {index < 4 ? "\u00A0" : ""}
+                    {index < 2 ? "\u00A0" : ""}
                   </span>
                 </span>
               ))}
+              <br />
+              {"with editorial".split(" ").map((word, index) => (
+                <span className="clip" key={`${word}-b-${index}`}>
+                  <span className="about-title-word">
+                    {word}
+                    {index < 2 ? "\u00A0" : ""}
+                  </span>
+                </span>
+              ))}
+              <br />
+              <span className="clip">
+                <span className="about-title-word">precision</span>
+              </span>
             </h2>
 
             <p className="about-lead">
               Desenvolvedora front-end com olhar de designer. Eu projeto interfaces que combinam
-              estética editorial, performance, arquitetura de componentes e movimento com propósito.
+              est\u00E9tica editorial, performance, arquitetura de componentes e movimento com prop\u00F3sito.
             </p>
           </div>
         </article>
 
+        {/* Panel 2: Editorial photo */}
         <article className="about-panel about-panel--photo">
-          <div className="about-panel-content about-photo-content">
-            <div className="about-photo-frame">
-              <div className="about-photo-mask">
-                <img className="about-photo-img" src={aboutPhoto} alt="Retrato editorial de Camila Lopes" />
-              </div>
-
-              <div className="about-orbit" aria-hidden="true">
-                <span />
-                <span />
-              </div>
+          <div className="about-photo-frame">
+            <div className="about-photo-mask">
+              <img className="about-photo-img" src={aboutPhoto} alt="Retrato editorial de Camila Lopes" />
             </div>
-
-            <p className="about-photo-caption">
-              Based in Brazil · building refined digital interfaces for recruiters, studios and independent brands.
-            </p>
+            <div className="about-photo-overlay" aria-hidden="true">
+              <span className="about-panel-index about-index--light">03</span>
+              <p>Based in Brazil &middot; building refined digital interfaces for recruiters, studios and independent brands.</p>
+            </div>
           </div>
         </article>
 
-        <article className="about-panel about-panel--skills">
+        {/* Panel 3: Capabilities grid */}
+        <article className="about-panel about-panel--capabilities">
           <div className="about-panel-content">
-            <p className="about-kicker">— What I bring</p>
+            <p className="about-kicker">&mdash; What I bring</p>
             <h3 className="about-panel-title">Design sensibility with front-end execution.</h3>
-            <p className="about-copy">
-              Meu diferencial está em transformar referências visuais em sistemas reais:
-              layout, interação, componentes, dados e narrativa funcionando juntos.
-            </p>
 
-            <div className="about-skills" aria-label="Skills">
-              {skills.map((skill) => (
-                <span className="about-skill" key={skill}>
-                  {skill}
-                </span>
+            <div className="about-capability-grid">
+              {capabilities.map((cap) => (
+                <div className="about-capability" key={cap.n}>
+                  <span>{cap.n}</span>
+                  <h4>{cap.title}</h4>
+                  <p>{cap.text}</p>
+                </div>
               ))}
             </div>
           </div>
         </article>
 
+        {/* Panel 4: Highlights + meters */}
         <article className="about-panel about-panel--highlights">
           <div className="about-panel-content">
-            <p className="about-kicker">— For recruiters</p>
+            <p className="about-kicker">&mdash; For recruiters</p>
             <h3 className="about-panel-title">I build the layer users feel first.</h3>
 
             <div className="about-highlight-grid">
@@ -348,6 +391,7 @@ export function AboutSection() {
                 </div>
               ))}
             </div>
+
             <div className="about-skill-loaders" aria-label="Skill quality meters">
               {skillMeters.map((skill) => (
                 <div
