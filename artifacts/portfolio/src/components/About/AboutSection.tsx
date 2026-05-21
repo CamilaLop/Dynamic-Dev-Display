@@ -104,39 +104,39 @@ export function AboutSection() {
         },
       });
 
+      // duração explícita = número de painéis móveis (3),
+      // assim as posições abaixo ficam em "unidades de painel"
+      const N = panels.length - 1; // 3
+
       horizontalTl
         .to(track, {
           x: () => -(panels.length - 1) * window.innerWidth,
           ease: "none",
+          duration: N,
         })
         .to(".about-photo-img", {
           scale: 1.06,
           xPercent: 5,
           ease: "none",
+          duration: N,
         }, 0)
         .to(".about-progress-line", {
           scaleX: 1,
           ease: "none",
-        }, 0);
-
-      // ── Photo growth: pequena → meia tela conforme scroll chega ao painel 2 ──
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: () => `top+=${window.innerWidth * 0.38} top`,
-          end: () => `top+=${window.innerWidth * 1.62} top`,
-          scrub: 1.4,
-          invalidateOnRefresh: true,
-        },
-      })
+          duration: N,
+        }, 0)
+        // ── Photo growth: clipPath pequena → meia tela durante a viagem para o painel 2 ──
+        // começa 0.35 painéis depois do início, dura 1.3 painéis (chega no meio do painel 2)
         .to(".about-photo-mask", {
           clipPath: "inset(25% 25% 25% 25%)",
-          ease: "none",
-        }, 0)
+          ease: "power1.inOut",
+          duration: 1.3,
+        }, 0.35)
         .to(".about-photo-img", {
           filter: "grayscale(0) contrast(1.02) brightness(0.92)",
           ease: "none",
-        }, 0);
+          duration: 1.3,
+        }, 0.35);
 
       // ── Capabilities list: panel 3 (index 2) ───────
       gsap.timeline({
