@@ -34,6 +34,119 @@ body {
   overflow-x: hidden;
 }
 
+/* ── Marquee band ── */
+.marquee-band {
+  overflow: hidden;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(244, 244, 241, 0.1);
+  border-bottom: 1px solid rgba(244, 244, 241, 0.1);
+}
+
+.marquee-band--dark {
+  background: #201d1d;
+  color: rgba(244, 244, 241, 0.46);
+}
+
+.marquee-band--light {
+  background: #f4f4f1;
+  color: rgba(32, 29, 29, 0.42);
+  border-color: rgba(32, 29, 29, 0.1);
+}
+
+.marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-inner {
+  white-space: nowrap;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  user-select: none;
+  will-change: transform;
+  display: inline-block;
+}
+
+/* ── Scroll progress bar ── */
+.sp-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 1000;
+  pointer-events: none;
+  background: transparent;
+}
+
+.sp-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--foreground);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+  transition: background 0.4s ease;
+}
+
+/* When in dark sections, the bar is light */
+.sp-bar--light { background: var(--background); }
+
+/* ── Section sticky label ── */
+.sp-label {
+  position: fixed;
+  bottom: clamp(1.5rem, 3vw, 2.5rem);
+  left: clamp(1.5rem, 3vw, 2.5rem);
+  z-index: 999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: #f4f4f1;
+}
+
+.sp-label span {
+  display: inline-block;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  will-change: transform, opacity;
+}
+
+/* ── Custom cursor ── */
+body { cursor: none; }
+a, button, [role="button"] { cursor: none; }
+
+.c-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--foreground);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+
+.c-ring {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--foreground);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+
 body.is-loading {
   height: 100vh;
   overflow: hidden;
