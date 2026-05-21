@@ -52,7 +52,7 @@ export function AboutSection() {
         scale: 1.2,
         filter: "grayscale(1) contrast(1.12) brightness(0.78)",
       });
-      gsap.set(".about-photo-mask", { clipPath: "inset(0% 0% 100% 0%)" });
+      gsap.set(".about-photo-mask", { clipPath: "inset(44% 38% 44% 38%)" });
       gsap.set(".about-cap-item", { x: -44, opacity: 0 });
       gsap.set(".about-stat-num", { y: 48, opacity: 0 });
       gsap.set(".about-skill-loader", { y: 56, opacity: 0 });
@@ -89,11 +89,7 @@ export function AboutSection() {
           duration: 0.4,
           ease: "power3.out",
         }, 0.38)
-        .to(".about-photo-mask", {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 0.58,
-          ease: "power3.inOut",
-        }, 0.42);
+        ;
 
       // ── Horizontal scroll ───────────────────────────
       const horizontalTl = gsap.timeline({
@@ -120,6 +116,25 @@ export function AboutSection() {
         }, 0)
         .to(".about-progress-line", {
           scaleX: 1,
+          ease: "none",
+        }, 0);
+
+      // ── Photo growth: pequena → meia tela conforme scroll chega ao painel 2 ──
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: () => `top+=${window.innerWidth * 0.38} top`,
+          end: () => `top+=${window.innerWidth * 1.62} top`,
+          scrub: 1.4,
+          invalidateOnRefresh: true,
+        },
+      })
+        .to(".about-photo-mask", {
+          clipPath: "inset(25% 25% 25% 25%)",
+          ease: "none",
+        }, 0)
+        .to(".about-photo-img", {
+          filter: "grayscale(0) contrast(1.02) brightness(0.92)",
           ease: "none",
         }, 0);
 
