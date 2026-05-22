@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Group77Path } from "./Group77Path";
+import group78 from "@assets/Group_78_1779425127041.svg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,80 +61,23 @@ export function ExperienceHover() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const svgs = gsap.utils.toArray<SVGSVGElement>(".experience-side-svg");
-      const leftPieces = gsap.utils.toArray<SVGElement>(
-        ".experience-side-svg--left path, .experience-side-svg--left line, .experience-side-svg--left polyline, .experience-side-svg--left polygon, .experience-side-svg--left circle, .experience-side-svg--left ellipse, .experience-side-svg--left rect"
-      );
-      const rightPieces = gsap.utils.toArray<SVGElement>(
-        ".experience-side-svg--right path, .experience-side-svg--right line, .experience-side-svg--right polyline, .experience-side-svg--right polygon, .experience-side-svg--right circle, .experience-side-svg--right ellipse, .experience-side-svg--right rect"
-      );
-      const allPieces = [...leftPieces, ...rightPieces];
+      gsap.set(".experience-side-svg", { autoAlpha: 0, yPercent: 6 });
 
-      gsap.set(svgs, {
-        autoAlpha: 0,
-        yPercent: 8,
-      });
-
-      allPieces.forEach((piece) => {
-        const geometry = piece as SVGElement & { getTotalLength?: () => number };
-
-        if (typeof geometry.getTotalLength === "function") {
-          const length = geometry.getTotalLength();
-
-          gsap.set(piece, {
-            strokeDasharray: length,
-            strokeDashoffset: length,
-          });
-        }
-
-        gsap.set(piece, {
-          autoAlpha: 0,
-          scale: 0.96,
-          transformOrigin: "50% 50%",
-        });
-      });
-
-      const reveal = gsap.timeline({
+      gsap.to(".experience-side-svg", {
+        autoAlpha: 1,
+        yPercent: 0,
+        duration: 0.55,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: section,
-          start: "top 84%",
-          end: "bottom 30%",
-          scrub: 1.08,
+          start: "top 80%",
+          end: "center 50%",
+          scrub: 1.1,
         },
       });
 
-      reveal
-        .to(svgs, {
-          autoAlpha: 1,
-          yPercent: 0,
-          duration: 0.08,
-          ease: "none",
-        }, 0)
-        .to(leftPieces, {
-          autoAlpha: 1,
-          scale: 1,
-          strokeDashoffset: 0,
-          duration: 0.82,
-          stagger: {
-            each: 0.055,
-            from: "start",
-          },
-          ease: "none",
-        }, 0.08)
-        .to(rightPieces, {
-          autoAlpha: 1,
-          scale: 1,
-          strokeDashoffset: 0,
-          duration: 0.82,
-          stagger: {
-            each: 0.055,
-            from: "start",
-          },
-          ease: "none",
-        }, 0.12);
-
       gsap.to(".experience-side-svg--left", {
-        yPercent: -5,
+        yPercent: -6,
         ease: "none",
         scrollTrigger: {
           trigger: section,
@@ -145,37 +88,13 @@ export function ExperienceHover() {
       });
 
       gsap.to(".experience-side-svg--right", {
-        yPercent: 5,
+        yPercent: 6,
         ease: "none",
         scrollTrigger: {
           trigger: section,
           start: "top bottom",
           end: "bottom top",
           scrub: 1.45,
-        },
-      });
-
-      gsap.to(leftPieces, {
-        xPercent: (i) => (i % 2 === 0 ? -3 : 3),
-        rotate: (i) => (i % 2 === 0 ? -1.25 : 1.25),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.35,
-        },
-      });
-
-      gsap.to(rightPieces, {
-        xPercent: (i) => (i % 2 === 0 ? 3 : -3),
-        rotate: (i) => (i % 2 === 0 ? 1.25 : -1.25),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.35,
         },
       });
     }, section);
@@ -455,8 +374,12 @@ export function ExperienceHover() {
   return (
     <section ref={sectionRef} className="experience-section">
 
-      <Group77Path className="experience-side-svg experience-side-svg--left" />
-      <Group77Path className="experience-side-svg experience-side-svg--right" />
+      <div className="experience-side-svg experience-side-svg--left">
+        <img src={group78} alt="" aria-hidden="true" />
+      </div>
+      <div className="experience-side-svg experience-side-svg--right">
+        <img src={group78} alt="" aria-hidden="true" />
+      </div>
 
       <div ref={webglRef} className="hover-effect-container" />
 

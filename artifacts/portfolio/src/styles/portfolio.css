@@ -1021,6 +1021,13 @@ img, svg {
 
 .experience-side-svg--left { left: clamp(0.75rem, 2.2vw, 2.4rem); }
 .experience-side-svg--right { right: clamp(0.75rem, 2.2vw, 2.4rem); transform: scaleX(-1); }
+.experience-side-svg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  opacity: 0.72;
+}
 
 .experience-side-svg path, .experience-side-svg line, .experience-side-svg polyline, .experience-side-svg polygon, .experience-side-svg circle, .experience-side-svg ellipse, .experience-side-svg rect {
   vector-effect: non-scaling-stroke;
