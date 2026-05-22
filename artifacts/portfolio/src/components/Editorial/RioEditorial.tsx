@@ -99,7 +99,7 @@ export function RioEditorial() {
         </div>
 
         <div className="rio-title">
-          <h2 className="rio-reveal">
+          <h2 className="rio-reveal text-[#d9d9d9]">
             Rio Editorial
             <br />
             System.
@@ -127,7 +127,7 @@ export function RioEditorial() {
             { k: "Rio · Web", v: "brasilidade sutil no sistema visual" },
           ].map((item) => (
             <div key={item.k} className="rio-stat rio-reveal">
-              <div>{item.k}</div>
+              <div className="text-[#d9d9d9]">{item.k}</div>
               <p>{item.v}</p>
             </div>
           ))}

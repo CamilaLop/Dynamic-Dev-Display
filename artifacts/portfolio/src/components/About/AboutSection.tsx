@@ -255,7 +255,6 @@ export function AboutSection() {
       <div className="about-progress" aria-hidden="true">
         <span className="about-progress-line" />
       </div>
-
       <div className="about-horizontal-track">
 
         {/* ── Panel 1 — Identity statement ── */}
@@ -324,7 +323,7 @@ export function AboutSection() {
         <article className="about-panel about-panel--caps">
           <div className="about-panel-content">
             <div className="about-caps-header">
-              <h3 className="about-caps-title">
+              <h3 className="about-caps-title text-[#ffffff] bg-[transparent] border-t-[#ffffff] border-r-[#ffffff] border-b-[#ffffff] border-l-[#ffffff]">
                 Design sensibility<br />
                 with front-end<br />
                 execution.
