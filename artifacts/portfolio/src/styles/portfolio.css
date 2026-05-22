@@ -771,6 +771,22 @@ img, svg {
   fill: #f4f4f1;
   filter: drop-shadow(0 0 8px rgba(244, 244, 241, 0.7));
 }
+.tl-hline {
+  stroke: rgba(244, 244, 241, 0.14);
+  stroke-width: 0.8px;
+  fill: none;
+}
+.tl-label {
+  fill: rgba(244, 244, 241, 0.26);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.tl-ripple {
+  fill: none;
+  stroke: rgba(244, 244, 241, 0.45);
+  stroke-width: 1px;
+}
 
 .tl-cards-wrap {
   position: relative;
@@ -1181,13 +1197,17 @@ img, svg {
 
 .about-bio {
   max-width: 50rem;
-  font-size: clamp(1.08rem, 1.5vw, 1.38rem);
-  line-height: 1.22;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.02rem, 1.38vw, 1.28rem);
+  line-height: 1.38;
+  letter-spacing: -0.025em;
   color: rgba(244, 244, 241, 0.62);
   margin: 0;
   align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
 }
+.about-bio p { margin: 0; }
 
 /* ── Panel 2: Photo full-bleed ── */
 .about-panel--photo {
@@ -1312,6 +1332,31 @@ img, svg {
   font-size: 0.8em;
   color: rgba(244, 244, 241, 0.2);
   font-style: normal;
+}
+
+/* ── Caps tagline phrases ── */
+.about-caps-taglines {
+  margin-top: clamp(2rem, 3.5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.about-caps-tagline {
+  overflow: hidden;
+  padding: 0.18em 0;
+}
+.about-caps-tagline-inner {
+  display: block;
+  font-size: clamp(1.3rem, 2.3vw, 2.4rem);
+  line-height: 1.0;
+  letter-spacing: -0.052em;
+  font-weight: 500;
+  color: rgba(244, 244, 241, 0.86);
+  will-change: transform;
+}
+.about-caps-tagline:nth-child(even) .about-caps-tagline-inner {
+  font-style: italic;
+  color: rgba(244, 244, 241, 0.32);
 }
 
 /* ── Panel 4: Numbers + skill meters ── */

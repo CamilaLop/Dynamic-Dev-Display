@@ -60,6 +60,7 @@ export function AboutSection() {
       gsap.set(".about-stat-num", { y: 48, opacity: 0 });
       gsap.set(".about-skill-loader", { y: 56, opacity: 0 });
       gsap.set(".about-skill-loader__bar", { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(".about-caps-tagline-inner", { x: "-112%" });
 
       // ── Intro TL (section scrolls into view, before pin) ──
       const introTl = gsap.timeline({
@@ -138,7 +139,7 @@ export function AboutSection() {
         // escala + cor revelam junto com a cortina (escala dura mais, como no CodePen)
         .fromTo(".about-photo-img",
           { scale: 1.3, filter: "grayscale(1) contrast(1.12) brightness(0.78)" },
-          { scale: 1, filter: "grayscale(0) contrast(1) brightness(0.95)", ease: "power2.out", duration: 1.6 },
+          { scale: 1, filter: "grayscale(0) contrast(1) brightness(1)", ease: "power2.out", duration: 0.76 },
           0.72
         );
 
@@ -150,13 +151,13 @@ export function AboutSection() {
           end: () => `top+=${window.innerWidth * 2.35} top`,
           scrub: 1.05,
         },
-      }).to(".about-cap-item", {
-        x: 0,
-        opacity: 1,
-        stagger: 0.09,
-        duration: 0.45,
-        ease: "power3.out",
-      });
+      })
+        .to(".about-cap-item", {
+          x: 0, opacity: 1, stagger: 0.09, duration: 0.45, ease: "power3.out",
+        })
+        .to(".about-caps-tagline-inner", {
+          x: 0, stagger: 0.11, duration: 0.38, ease: "power3.out",
+        }, 0.32);
 
       // ── Stats: panel 4 (index 3) ────────────────────
       gsap.timeline({
@@ -172,6 +173,28 @@ export function AboutSection() {
         stagger: 0.06,
         duration: 0.42,
         ease: "power3.out",
+      });
+
+      // ── Counters for stat numbers ─────────────────────
+      const statVals = gsap.utils.toArray<HTMLElement>(".about-stat-val");
+      statVals.forEach((el) => {
+        const target = Number(el.dataset.target) || 0;
+        const counter = { value: 0 };
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: () => `top+=${window.innerWidth * 2.68} top`,
+            end: () => `top+=${window.innerWidth * 3.22} top`,
+            scrub: 1.05,
+          },
+        }).to(counter, {
+          value: target,
+          duration: 0.8,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent = String(Math.round(counter.value));
+          },
+        });
       });
 
       // ── Skill loaders: panel 4 ──────────────────────
@@ -273,10 +296,11 @@ export function AboutSection() {
               </div>
             </dl>
 
-            <p className="about-bio">
-              Desenvolvedora front-end com olhar de designer. Interfaces que combinam
-              est&eacute;tica editorial, performance e movimento com prop&oacute;sito.
-            </p>
+            <div className="about-bio">
+              <p>I'm Camila Lopes, a designer and front-end developer creating digital experiences with personality, rhythm, and intention.</p>
+              <p>My work lives between design and code — where visual systems, motion, storytelling, and interaction come together.</p>
+              <p>Inspired by Brazilian colors, organic forms, editorial layouts, and the energy of Rio, I build interfaces that feel warm, elegant, and alive.</p>
+            </div>
           </div>
         </article>
 
@@ -316,6 +340,19 @@ export function AboutSection() {
                 </li>
               ))}
             </ol>
+
+            <div className="about-caps-taglines" aria-hidden="true">
+              {[
+                "Design-led development.",
+                "Culturally rooted interfaces.",
+                "Motion with purpose.",
+                "Digital experiences that feel alive.",
+              ].map((line) => (
+                <div className="about-caps-tagline" key={line}>
+                  <span className="about-caps-tagline-inner">{line}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </article>
 
@@ -326,16 +363,22 @@ export function AboutSection() {
 
             <div className="about-stats">
               <div className="about-stat">
-                <strong className="about-stat-num">3+</strong>
+                <strong className="about-stat-num">
+                  <span className="about-stat-val" data-target="3">0</span>+
+                </strong>
                 <span className="about-stat-label">Years building</span>
               </div>
               <div className="about-stat">
-                <strong className="about-stat-num">40+</strong>
+                <strong className="about-stat-num">
+                  <span className="about-stat-val" data-target="20">0</span>+
+                </strong>
                 <span className="about-stat-label">Projects shipped</span>
               </div>
               <div className="about-stat">
-                <strong className="about-stat-num">18</strong>
-                <span className="about-stat-label">Core technologies</span>
+                <strong className="about-stat-num">
+                  <span className="about-stat-val" data-target="50">0</span>+
+                </strong>
+                <span className="about-stat-label">UI components built</span>
               </div>
             </div>
 
