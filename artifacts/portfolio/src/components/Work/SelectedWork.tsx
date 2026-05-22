@@ -315,10 +315,6 @@ export function SelectedWork() {
   return (
     <section id="projects" ref={root} className="selected-section">
       <div className="selected-heading">
-        <div className="clip">
-          <div className="selected-reveal selected-label">— Index 02</div>
-        </div>
-
         <div className="selected-title-wrap">
           <h2 className="selected-reveal selected-title">
             Selected Work

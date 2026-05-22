@@ -1200,7 +1200,7 @@ img, svg {
   font-size: clamp(1.02rem, 1.38vw, 1.28rem);
   line-height: 1.38;
   letter-spacing: -0.025em;
-  color: rgba(244, 244, 241, 0.62);
+  color: rgba(244, 244, 241, 0.85);
   margin: 0;
   align-self: end;
   display: flex;
@@ -1609,7 +1609,7 @@ img, svg {
 
 .brand-logo__real {
   display: block;
-  width: clamp(7.8rem, 11vw, 13rem);
+  width: clamp(4.2rem, 5.5vw, 6.5rem);
   height: auto;
   max-width: none;
   object-fit: contain;

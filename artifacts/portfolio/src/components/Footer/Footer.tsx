@@ -73,7 +73,6 @@ export function Footer() {
     <footer id="contact" ref={root} className="footer-section">
       <div className="footer-parallax">
         <div className="footer-top">
-          <span className="footer-kicker">— Contact · 05</span>
           <div className="footer-line" aria-hidden="true" />
         </div>
 

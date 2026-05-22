@@ -262,7 +262,6 @@ export function AboutSection() {
         <article className="about-panel about-panel--identity">
           <div className="about-panel-content">
             <div className="about-id-top">
-              <p className="about-kicker">&mdash;&nbsp;03&nbsp;/ About</p>
               <time className="about-year">2026</time>
             </div>
 
@@ -325,7 +324,6 @@ export function AboutSection() {
         <article className="about-panel about-panel--caps">
           <div className="about-panel-content">
             <div className="about-caps-header">
-              <p className="about-kicker">&mdash;&nbsp;What I build</p>
               <h3 className="about-caps-title">
                 Design sensibility<br />
                 with front-end<br />
@@ -359,7 +357,6 @@ export function AboutSection() {
         {/* ── Panel 4 — Numbers + skill meters ── */}
         <article className="about-panel about-panel--numbers">
           <div className="about-panel-content">
-            <p className="about-kicker">&mdash;&nbsp;Expertise &amp; availability</p>
 
             <div className="about-stats">
               <div className="about-stat">

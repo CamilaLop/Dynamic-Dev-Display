@@ -134,7 +134,6 @@ export function TimelineSection() {
     <section ref={sectionRef} className="tl-section">
       <div className="tl-sticky">
         <div className="tl-top-label">
-          <span className="tl-kicker">— Index 04</span>
           <h2 className="tl-heading">
             The <em>approach</em>
           </h2>

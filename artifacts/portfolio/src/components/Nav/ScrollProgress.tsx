@@ -86,10 +86,6 @@ export function ScrollProgress() {
         <div ref={barRef} className="sp-bar" />
       </div>
 
-      {/* Sticky section label — bottom-left */}
-      <div className="sp-label" aria-hidden="true">
-        <span ref={labelRef}>01 — Hero</span>
-      </div>
     </>
   );
 }
