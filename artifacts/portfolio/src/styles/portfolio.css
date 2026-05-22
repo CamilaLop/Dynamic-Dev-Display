@@ -1607,6 +1607,35 @@ img, svg {
   font-size: clamp(1rem, 1.35vw, 1.25rem);
 }
 
+.hero-cta-link {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  border: 1px solid rgba(244, 244, 241, 0.45);
+  border-radius: 100px;
+  padding: 0.28em 0.85em 0.32em;
+  letter-spacing: -0.01em;
+  color: #f4f4f1;
+  text-decoration: none;
+  transition: background 0.22s ease, border-color 0.22s ease;
+}
+.hero-cta-link:hover {
+  background: rgba(244, 244, 241, 0.1);
+  border-color: rgba(244, 244, 241, 0.7);
+}
+.hero-cta-arrow {
+  display: inline-block;
+  font-style: normal;
+  font-size: 0.9em;
+  transition: transform 0.24s cubic-bezier(0.35, 0, 0.15, 1);
+  will-change: transform;
+}
+.hero-cta-link:hover .hero-cta-arrow {
+  transform: translate(2px, -2px);
+}
+
 .brand-logo__real {
   display: block;
   width: clamp(4.2rem, 5.5vw, 6.5rem);

@@ -240,9 +240,12 @@ export function HeroScrollReveal({
           <nav className="hero-nav">
             <Logo className="hero-logo" />
             <div className="hero-links">
-              <FledgeLink href="#projects" label="Projects" />
-              <FledgeLink href="#about" label="About" />
-              <FledgeLink href="#contact" label="Contact" />
+              <FledgeLink href="#projects" label="Works" />
+              <FledgeLink href="#about" label="About me" />
+              <a href="#contact" className="hero-cta-link">
+                Let's Work
+                <span className="hero-cta-arrow" aria-hidden="true">↗</span>
+              </a>
             </div>
           </nav>
 
