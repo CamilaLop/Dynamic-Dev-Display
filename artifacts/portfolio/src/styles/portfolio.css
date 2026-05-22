@@ -368,9 +368,11 @@ img, svg {
   display: flex;
   gap: clamp(1.25rem, 2vw, 2rem);
   font-size: clamp(1rem, 1.35vw, 1.25rem);
+  align-items: center;
+  white-space: nowrap;
 }
 
-.hero-links a { pointer-events: auto; }
+.hero-links a { pointer-events: auto; white-space: nowrap; }
 
 .hero-bottom {
   display: flex;
@@ -1619,6 +1621,7 @@ img, svg {
   letter-spacing: -0.01em;
   color: #f4f4f1;
   text-decoration: none;
+  white-space: nowrap;
   transition: background 0.22s ease, border-color 0.22s ease;
 }
 .hero-cta-link:hover {
