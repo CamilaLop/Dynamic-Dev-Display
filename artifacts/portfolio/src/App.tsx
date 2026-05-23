@@ -9,7 +9,6 @@ import { TimelineSection } from "./components/About/TimelineSection";
 import { Footer } from "./components/Footer/Footer";
 import { MarqueeBand } from "./components/Marquee/MarqueeBand";
 import { ScrollProgress } from "./components/Nav/ScrollProgress";
-import { NavIsland } from "./components/Nav/NavIsland";
 import { CustomCursor } from "./components/Cursor/CustomCursor";
 import { useLenis } from "./hooks/useLenis";
 import { useThemeTransition } from "./hooks/useThemeTransition";
@@ -25,7 +24,6 @@ export default function App() {
   return (
     <>
       <CustomCursor />
-      <NavIsland />
       {introDone && <ScrollProgress />}
 
       {!loaderDone && <Preloader onDone={() => setLoaderDone(true)} />}
