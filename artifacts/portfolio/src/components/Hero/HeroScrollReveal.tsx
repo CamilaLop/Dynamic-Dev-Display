@@ -223,10 +223,10 @@ export function HeroScrollReveal({
 
           <div className="hero-descriptors" aria-label="Services and origin">
             {([
-              ["CREATIVE DESIGN (UX/UI)", "hero-descriptor--service"],
-              ["DEVELOPMENT SOLUTIONS",   "hero-descriptor--service"],
-              ["inspired by Rio",         "hero-descriptor--origin"],
-              ["Turn an idea into reality", "hero-descriptor--tagline"],
+              ["Creative development",      "hero-descriptor--skill"],
+              ["Design sensibility",        "hero-descriptor--skill"],
+              ["Intentional interaction",   "hero-descriptor--skill"],
+              ["Front-end craft",           "hero-descriptor--skill"],
             ] as const).map(([text, cls]) => (
               <div className="hero-descriptor-clip" key={text}>
                 <span className={`hero-descriptor-inner ${cls}`}>{text}</span>
@@ -249,7 +249,7 @@ export function HeroScrollReveal({
             </div>
           </nav>
 
-          <p className="hero-overlay-tagline">inspired by Rio</p>
+          <p className="hero-overlay-tagline">Design-led interfaces with front-end craft</p>
 
           <div className="hero-bottom">
             <h1 className="hero-bottom-name circular-text-reveal" data-text="Camila Lopes">Camila Lopes</h1>

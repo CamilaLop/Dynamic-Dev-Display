@@ -315,6 +315,14 @@ img, svg {
   margin-top: 0.1rem;
 }
 
+.hero-descriptor--skill {
+  font-size: clamp(1rem, 1.85vw, 1.5rem);
+  letter-spacing: -0.025em;
+  color: rgba(32, 29, 29, 0.68);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
 .scroll-cue {
   position: absolute;
   left: 50%;
