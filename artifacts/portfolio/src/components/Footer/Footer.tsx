@@ -92,6 +92,8 @@ export function Footer() {
           </svg>
         </a>
 
+        <span className="footer-location">Based in Rio de Janeiro</span>
+
         <div className="footer-links">
           <a href="https://github.com" target="_blank" rel="noreferrer" className="footer-link">GitHub</a>
           <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer-link">LinkedIn</a>

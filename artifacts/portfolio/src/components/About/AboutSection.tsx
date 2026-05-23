@@ -138,8 +138,8 @@ export function AboutSection() {
         )
         // escala + cor revelam junto com a cortina (escala dura mais, como no CodePen)
         .fromTo(".about-photo-img",
-          { scale: 1.3, filter: "grayscale(1) contrast(1.12) brightness(0.78)" },
-          { scale: 1, filter: "grayscale(0) contrast(1) brightness(1)", ease: "power2.out", duration: 0.76 },
+          { scale: 1.3, filter: "grayscale(1) contrast(1.12) brightness(0.72) blur(10px)" },
+          { scale: 1, filter: "grayscale(0) contrast(1) brightness(1) blur(0px)", ease: "power2.out", duration: 0.76 },
           0.72
         );
 
@@ -310,6 +310,7 @@ export function AboutSection() {
                 className="about-photo-img"
                 src={aboutPhoto}
                 alt="Retrato editorial de Camila Lopes"
+                loading="lazy"
               />
             </div>
             <div className="about-photo-overlay">

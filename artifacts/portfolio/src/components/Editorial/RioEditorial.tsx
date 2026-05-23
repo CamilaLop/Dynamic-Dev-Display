@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SemiLogoSymbol } from "../Brand/SemiLogoSymbol";
+import rioBg from "@assets/rio-paisagem_1779253459430.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +15,38 @@ export function RioEditorial() {
     const ctx = gsap.context(() => {
       gsap.set(".rio-reveal", { yPercent: 105, opacity: 0 });
       gsap.set(".rio-sym", { rotate: 22, scale: 0.76, opacity: 0 });
+
+      // ── Background photo: subtle zoom out as section scrolls in ──
+      gsap.fromTo(
+        ".rio-bg-photo img",
+        { scale: 1.1 },
+        {
+          scale: 1.0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2.2,
+          },
+        }
+      );
+
+      // ── Overlay dims as text appears ──
+      gsap.fromTo(
+        ".rio-bg-overlay",
+        { opacity: 0.55 },
+        {
+          opacity: 0.72,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top bottom",
+            end: "center center",
+            scrub: 1.4,
+          },
+        }
+      );
 
       gsap.fromTo(
         ".rio-parallax-layer",
@@ -93,11 +126,14 @@ export function RioEditorial() {
 
   return (
     <section ref={root} className="rio-section">
-      <div className="rio-parallax-layer">
-        <div className="clip">
-          <div className="rio-reveal rio-label">— Manifesto · 03</div>
-        </div>
 
+      {/* Background photo with parallax zoom */}
+      <div className="rio-bg-photo" aria-hidden="true">
+        <img src={rioBg} alt="" loading="lazy" />
+        <div className="rio-bg-overlay" />
+      </div>
+
+      <div className="rio-parallax-layer">
         <div className="rio-title">
           <h2 className="rio-reveal text-[#d9d9d9]">
             Rio Editorial
@@ -110,21 +146,21 @@ export function RioEditorial() {
         <div className="rio-grid">
           <div className="rio-text rio-reveal">
             <p>
-              Um sistema visual inspirado no Rio, em composição editorial, movimento suave e
-              identidade digital autoral.
+              A visual system inspired by Rio — editorial composition, soft motion
+              and a distinct digital identity.
             </p>
             <p>
-              Cada projeto funciona como uma página viva: hierarquia primeiro, movimento a
-              serviço da leitura e interação sem excesso.
+              Each project works as a living page: hierarchy first, motion in service
+              of reading, and interaction without excess.
             </p>
           </div>
         </div>
 
         <div className="rio-stats">
           {[
-            { k: "UI Motion", v: "interações suaves e intencionais" },
-            { k: "Editorial", v: "layout com ritmo, escala e respiro" },
-            { k: "Rio · Web", v: "brasilidade sutil no sistema visual" },
+            { k: "UI Motion",   v: "smooth and intentional interactions" },
+            { k: "Editorial",   v: "layout with rhythm, scale and breathing room" },
+            { k: "Rio · Web",   v: "subtle Brazilianness in the visual system" },
           ].map((item) => (
             <div key={item.k} className="rio-stat rio-reveal">
               <div className="text-[#d9d9d9]">{item.k}</div>

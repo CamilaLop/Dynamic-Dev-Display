@@ -15,39 +15,34 @@ type ExperienceItem = {
 
 const items: ExperienceItem[] = [
   {
-    id: "experience3",
-    title: "Shake The Cursor",
-    side: "Go to next item in menu",
-    image:
-      "https://images.unsplash.com/photo-1714859100393-ddecc4e306f9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: "exp1",
+    title: "Landing Pages",
+    side: "Conversion Design",
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=2070&auto=format&fit=crop&q=80",
   },
   {
-    id: "experience1",
-    title: "Image is a piece of fabric",
-    side: "Enjoy Shaking",
-    image:
-      "https://images.unsplash.com/photo-1740220501390-90302389b06a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: "exp2",
+    title: "Data Dashboards",
+    side: "Product UI",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=2070&auto=format&fit=crop&q=80",
   },
   {
-    id: "experience2",
-    title: "Image changes as you go",
-    side: "How cool is this",
-    image:
-      "https://images.unsplash.com/photo-1695374688656-212722801e40?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: "exp3",
+    title: "Commerce Flow",
+    side: "E-commerce",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=2070&auto=format&fit=crop&q=80",
   },
   {
-    id: "experience4",
-    title: "Startup Ventures",
-    side: "Software Engineering Intern",
-    image:
-      "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: "exp4",
+    title: "Brand Motion",
+    side: "Identity + Web",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=2070&auto=format&fit=crop&q=80",
   },
   {
-    id: "experience5",
-    title: "Code Masters Ltd.",
-    side: "Junior Developer",
-    image:
-      "https://images.unsplash.com/photo-1547331942-d21ad99c22ae?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: "exp5",
+    title: "Editorial Systems",
+    side: "Motion UI",
+    image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=2070&auto=format&fit=crop&q=80",
   },
 ];
 
