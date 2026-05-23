@@ -704,25 +704,6 @@ img, svg {
   opacity: 1;
 }
 
-/* ── Slide Pins: stacked card exit ────────────────────────────── */
-/*
-  The last 3 content sections exit as "cards" that shrink + fade,
-  revealing the next section rising beneath. No overflow:hidden here
-  so sticky children (tl-sticky) keep working. border-radius rounds
-  the background; GSAP animates it from 0→22px during the exit.
-*/
-.tl-section,
-.rio-section,
-.footer-section {
-  will-change: transform, opacity;
-  transform-origin: top center;
-}
-
-/* z-index: sections stack so each "exiting" card sits above the next */
-.tl-section      { position: relative; z-index: 3; }
-.rio-section     { z-index: 2; }
-.footer-section  { z-index: 1; }
-
 /* ── Timeline Section ── */
 .tl-section {
   position: relative;

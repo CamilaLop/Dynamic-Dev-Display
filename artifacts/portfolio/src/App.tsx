@@ -13,7 +13,6 @@ import { NavIsland } from "./components/Nav/NavIsland";
 import { CustomCursor } from "./components/Cursor/CustomCursor";
 import { useLenis } from "./hooks/useLenis";
 import { useThemeTransition } from "./hooks/useThemeTransition";
-import { useSlidePins } from "./hooks/useSlidePins";
 import heroRio from "@assets/rio-paisagem_1779253459430.png";
 
 export default function App() {
@@ -22,7 +21,6 @@ export default function App() {
 
   useLenis(introDone);
   useThemeTransition(introDone);
-  useSlidePins(introDone);
 
   return (
     <>
